@@ -29,28 +29,28 @@ contract Mechadium is Context, IBEP20, Ownable, LGEWhitelisted {
     }
 
     /**
-    * @dev Returns the bep token owner.
+    * @dev See {BEP20-getOwner}.
     */
     function getOwner() external override view returns (address) {
         return owner();
     }
     
     /**
-    * @dev Returns the token decimals.
+    * @dev See {BEP20-decimals}.
     */
     function decimals() external override view returns (uint8) {
         return _decimals;
     }
     
     /**
-    * @dev Returns the token symbol.
+    * @dev See {BEP20-symbol}.
     */
     function symbol() external override view returns (string memory) {
         return _symbol;
     }
     
     /**
-    * @dev Returns the token name.
+    * @dev See {BEP20-name}.
     */
     function name() external override view returns (string memory) {
         return _name;

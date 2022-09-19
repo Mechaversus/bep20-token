@@ -118,7 +118,7 @@ describe("Mechadium", () => {
       expect(await pad.decimals()).to.be.equal(18);
     });
 
-    it("total supply should be 100 000 000 000 tokens", async () => {
+    it("total supply should be 10 000 000 000 tokens", async () => {
       const { pad } = await deployWithLGE();
       expect(await pad.totalSupply()).to.be.equal(tokens("10000000000"));
     });
