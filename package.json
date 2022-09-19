@@ -1,7 +1,7 @@
 {
   "author": "B2B",
   "license": "MIT",
-  "name": "MECHAX BEP20 Token",
+  "name": "bep20-token",
   "version": "1.0.0",
   "description": "MECHAX ( Mechadium ) BEP20 Token Contract",
   "devDependencies": {
