@@ -1,4 +1,5 @@
-pragma solidity 0.5.16;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;
 
 import { Context } from "./Context.sol";
 import { SafeMath } from "./SafeMath.sol";
@@ -22,7 +23,7 @@ contract LGEWhitelisted is Context {
 
     event WhitelisterTransferred(address indexed previousWhitelister, address indexed newWhitelister);
 
-    constructor () internal {
+    constructor () {
         _whitelister = _msgSender();
     }
 
@@ -63,7 +64,9 @@ contract LGEWhitelisted is Context {
             delete _lgeWhitelistRounds;
         
             for (uint256 i = 0; i < durations.length; i++) {
-                _lgeWhitelistRounds.push(WhitelistRound(durations[i], amountsMax[i]));
+                _lgeWhitelistRounds.push();
+                _lgeWhitelistRounds[i].duration = durations[i];
+                _lgeWhitelistRounds[i].amountMax = amountsMax[i];
             } 
         }
     }
@@ -96,7 +99,7 @@ contract LGEWhitelisted is Context {
      *
      *  returns:
      *
-     *  1. whitelist round number ( 0 = no active round now )
+     *  1. whitelist round number ( 0 = no active round block.timestamp )
      *  2. duration, in seconds, current whitelist round is active for
      *  3. timestamp current whitelist round closes at
      *  4. maximum amount a whitelister can purchase in this round
@@ -112,7 +115,7 @@ contract LGEWhitelisted is Context {
                 WhitelistRound storage wlRound = _lgeWhitelistRounds[i];
                 wlCloseTimestampLast = wlCloseTimestampLast.add(wlRound.duration);
 
-                if(now <= wlCloseTimestampLast)
+                if(block.timestamp <= wlCloseTimestampLast)
                     return (i.add(1), wlRound.duration, wlCloseTimestampLast, wlRound.amountMax, wlRound.addresses[_msgSender()], wlRound.purchased[_msgSender()]);
             }
         }
@@ -129,7 +132,7 @@ contract LGEWhitelisted is Context {
             return;
         
         if(_lgeTimestamp == 0 && sender != _lgePairAddress && recipient == _lgePairAddress && amount > 0)
-            _lgeTimestamp = now;
+            _lgeTimestamp = block.timestamp;
         
         if(sender == _lgePairAddress && recipient != _lgePairAddress) {
             //buying

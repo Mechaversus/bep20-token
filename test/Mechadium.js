@@ -251,7 +251,7 @@ describe("Mechadium", () => {
       const { pad } = await deployWithTokenHolders();
       let data = await pad.getLGEWhitelistRound();
       expect(data[0]).to.be.equal(1);
-      increaseTime(1500);
+      await increaseTime(1500);
       data = await pad.getLGEWhitelistRound();
       expect(data[0]).to.be.equal(0);
     });
