@@ -1,4 +1,4 @@
-# MECHAX BEP20 Token Contract
+# Mechadium Token Contract
 
 The MECHAX BEP20 Token contract deployed on the Binance Smart Chain.
 
